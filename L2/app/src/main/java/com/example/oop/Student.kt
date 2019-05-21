@@ -9,6 +9,8 @@ class Student(ten : String, diachi : String, namsinh : Int) {
         name = ten
         address = diachi
         born = namsinh
+
+        setBorn(born)
     }
 
 //    constructor(ten : String, diachi : String, namsinh : Int) {

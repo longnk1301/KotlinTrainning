@@ -2,6 +2,7 @@ package com.example.ungdunghoctoan
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -37,5 +38,17 @@ class MainActivity : AppCompatActivity() {
             var ketqua : Int = sothu1 / sothu2
             result.text = ketqua.toString()
         }
+
+        fun MutableList<Int>.swap(index1: Int, index2: Int) {
+            val tmp = this[index1]
+            this[index1] = this[index2]
+            this[index2] = tmp
+        }
+
+        val l = mutableListOf(1,2,3)
+
+        l.swap(0, 2)
+
+        Log.d("AAA", l.toString())
     }
 }
