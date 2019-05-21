@@ -3,6 +3,7 @@ package com.example.lifecycle.view
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import com.example.lifecycle.data.OnDataReadyCallback
+import com.example.lifecycle.data.OnRepositoryReadyCallback
 import com.example.lifecycle.data.RepoModel
 
 class MainViewModel : ViewModel(){
@@ -10,7 +11,8 @@ class MainViewModel : ViewModel(){
     val text = ObservableField("old data")
     val isLoading = ObservableField(false)
 
-//    var repositories = ArrayList<Repository>()
+    //lifecycle
+    var repositories = ArrayList<Repository>()
 
     fun refresh() {
         isLoading.set(true)
@@ -23,6 +25,12 @@ class MainViewModel : ViewModel(){
     }
 
     fun loadRepositories() {
-//        isLos
+        isLoading.set(true)
+        repoModel.getRepositories(object: OnRepositoryReadyCallback {
+            override fun onDataReady(data: ArrayList<Repository>) {
+                isLoading.set(false)
+                repositories = data
+            }
+        })
     }
 }

@@ -1,6 +1,7 @@
 package com.example.lifecycle.data
 
 import android.os.Handler
+import com.example.lifecycle.view.Repository
 
 
 class RepoModel {
@@ -9,17 +10,18 @@ class RepoModel {
             onDataReadyCallback.onDataReady("new data")
         }, 2000)
     }
-//
-//    fun getRepositories(onRepositoryReadyCallback: OnRepositoryReadyCallback) {
-//        var arrayList = ArrayList<Repository>()
-//        arrayList.add(Repository("First", "Owner 1", 100 , false))
-//        arrayList.add(Repository("Second", "Owner 2", 30 , true))
-//        arrayList.add(Repository("Third", "Owner 3", 430 , false))
-//
-//        Handler().postDelayed({
-//            onRepositoryReadyCallback.onDataReady(arrayList)
-//        }, 2000)
-//    }
+
+    //lifecycle
+    fun getRepositories(onRepositoryReadyCallback: OnRepositoryReadyCallback) {
+        var arrayList = ArrayList<Repository>()
+        arrayList.add(Repository("First", "Owner 1", 100 , false))
+        arrayList.add(Repository("Second", "Owner 2", 30 , true))
+        arrayList.add(Repository("Third", "Owner 3", 430 , false))
+
+        Handler().postDelayed({
+            onRepositoryReadyCallback.onDataReady(arrayList)
+        }, 2000)
+    }
 
 }
 
@@ -27,6 +29,7 @@ interface OnDataReadyCallback {
     fun onDataReady(data: String)
 }
 
-//interface OnRepositoryReadyCallback {
-//    fun onDataReady(data: ArrayList<Repository>)
-//}
+//lifecycle
+interface OnRepositoryReadyCallback {
+    fun onDataReady(data: ArrayList<Repository>)
+}
