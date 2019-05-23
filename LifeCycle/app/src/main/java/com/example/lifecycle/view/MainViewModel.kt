@@ -2,6 +2,7 @@ package com.example.lifecycle.view
 
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
+import android.util.Log
 import com.example.lifecycle.data.OnDataReadyCallback
 import com.example.lifecycle.data.OnRepositoryReadyCallback
 import com.example.lifecycle.data.RepoModel
@@ -29,6 +30,7 @@ class MainViewModel : ViewModel(){
         repoModel.getRepositories(object: OnRepositoryReadyCallback {
             override fun onDataReady(data: ArrayList<Repository>) {
                 isLoading.set(false)
+                Log.d("AAA", data.toString())
                 repositories = data
             }
         })

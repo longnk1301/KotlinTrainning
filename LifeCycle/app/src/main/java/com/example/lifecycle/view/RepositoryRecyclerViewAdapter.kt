@@ -3,14 +3,13 @@ package com.example.lifecycle.view
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.AdapterView
 import com.example.lifecycle.databinding.RvItemRepositoryBinding
 
 class RepositoryRecyclerViewAdapter(private var items: ArrayList<Repository>,
-                                    private var listener: AdapterView.OnItemClickListener)
+                                    private var listener: OnItemClickListener)
     : RecyclerView.Adapter<RepositoryRecyclerViewAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryRecyclerViewAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent?.context)
         val binding = RvItemRepositoryBinding.inflate(layoutInflater, parent, false)
 
@@ -28,7 +27,7 @@ class RepositoryRecyclerViewAdapter(private var items: ArrayList<Repository>,
 
     class ViewHolder(private var binding: RvItemRepositoryBinding) :
             RecyclerView.ViewHolder(binding.root) {
-        fun bind(repo: Repository, listener: OnItemClickListener?) {
+        fun bind(repo: Repository, listener: OnItemClickListener) {
             binding.repository = repo
             if (listener != null) {
                 binding.root.setOnClickListener({ _ -> listener.onItemClick(layoutPosition)})
