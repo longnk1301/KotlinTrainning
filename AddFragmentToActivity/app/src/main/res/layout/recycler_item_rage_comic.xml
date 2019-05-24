@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="comic"
+            type="com.example.addfragmentintoactivity.data.Comic"/>
+    </data>
+
+    <FrameLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp">
+        <ImageView
+                android:id="@+id/comic_image"
+                android:layout_width="match_parent"
+                android:adjustViewBounds="true"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                android:layout_height="match_parent"
+                imageResource="@{comic.imageResId}"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/name"
+            style="@style/TextAppearance.AppCompat.Subhead.Inverse"
+            android:layout_gravity="bottom"
+            android:background="@color/blue_grey_800_50p"
+            android:minHeight="48dp"
+            android:padding="16dp"
+            tools:text="@{comic.name}"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
+</layout>
