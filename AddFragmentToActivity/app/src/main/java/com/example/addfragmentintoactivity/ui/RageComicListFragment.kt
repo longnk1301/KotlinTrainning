@@ -26,16 +26,17 @@ class RageComicListFragment : Fragment() {
     }
 
     internal inner class RageComicAdapter(context: Context): RecyclerView.Adapter<ViewHolder>() {
-        override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-            val comic =
-                Comic(imageResIds[p1], names[p1], desctiptions[p1], urls[p1])
-            p0.setData(comic)
-        }
 
         private val layoutInflater: LayoutInflater
 
         init {
             layoutInflater = LayoutInflater.from(context)
+        }
+
+        override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
+            val comic =
+                Comic(imageResIds[p1], names[p1], desctiptions[p1], urls[p1])
+            p0.setData(comic)
         }
 
         override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
