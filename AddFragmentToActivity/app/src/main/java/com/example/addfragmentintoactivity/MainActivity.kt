@@ -2,6 +2,9 @@ package com.example.addfragmentintoactivity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import com.example.addfragmentintoactivity.data.Comic
+import com.example.addfragmentintoactivity.ui.RageComicDetailsFragment
 import com.example.addfragmentintoactivity.ui.RageComicListFragment
 
 /*
@@ -20,7 +23,7 @@ import com.example.addfragmentintoactivity.ui.RageComicListFragment
 
 /*Note: Làm từ dưới lên, ví dụ có 1 listItem thì hãy tạo Detail, code xml trước sau đó code logic*/
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), RageComicListFragment.OnRageComicSelected {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,5 +51,17 @@ class MainActivity : AppCompatActivity() {
                 .add(R.id.root_layout, RageComicListFragment.newInstance(), "rageComicList")
                 .commit() //để FragmentManger thêm vào Activity
         }
+    }
+
+    //implement OnRageComicSelected
+    override fun onRageComicSelected(comic: Comic) {
+//        Toast.makeText(this, "you selected" + comic.name + "!", Toast.LENGTH_SHORT).show()
+
+        val detailsFragment = RageComicDetailsFragment.newInstance(comic)
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.root_layout, detailsFragment, "rageComicDetails") //thay thế fragment hiện tại
+            .addToBackStack(null) //addToBackStack - đẻ add 1 instance của fragment vào stack
+            .commit()
     }
 }

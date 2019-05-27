@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.addfragmentintoactivity.R
+import com.example.addfragmentintoactivity.data.Comic
+import java.io.Serializable
+import com.example.addfragmentintoactivity.databinding.FragmentRageComicDetailsBinding
 
 class RageComicDetailsFragment : Fragment() {
 
@@ -16,7 +19,7 @@ class RageComicDetailsFragment : Fragment() {
         vì sử dụng constructor. Nhiều bạn sẽ thắc mắc tại sao lại vậy đúng không?
 
         Thứ nhất: Do bạn không định nghĩa bất kỳ constructor nào, trình biên dịch tự động
-            tạo ra một constructor mặc định, không có đối số đủ để tạo được i
+            tạo ra một constructor mặc định, không có đối số đủ để tạo được.
             Đây là tất cả những gì bạn cần có cho một fragment.
 
         Thứ hai: Khi ứng dụng chuyển sang chạy nền(background) thì Android sẽ destroy Activities
@@ -27,8 +30,20 @@ class RageComicDetailsFragment : Fragment() {
             Nếu có tạo constructor có tham số thì bắt buộc bạn phải viết thêm hàm constructor không tham số.
             Cách đơn giản nhất là dùng factory method như mình làm ở trên.*/
     companion object {
-        fun newInstance(): RageComicDetailsFragment {
-            return RageComicDetailsFragment()
+
+        // đoạn code phái dưới được dùng lưu thông tin về Rage Comic được chọn trong RageComicDetailsFragment arguments.
+        private const val COMIC = "comic"
+
+        fun newInstance(comic: Comic): RageComicDetailsFragment {
+            /*
+            * Một fragment có thể lấy thông số khởi tạo thông qua các đối số(Arguments).
+            * Arguments là một Bundle lưu trữ Arguments dưới dạng key-value
+            * */
+            val args = Bundle()
+            args.putSerializable(COMIC, comic as Serializable)
+            val fragment = RageComicDetailsFragment()
+            fragment.arguments = args
+            return fragment
         }
     }
 
@@ -39,8 +54,18 @@ class RageComicDetailsFragment : Fragment() {
     //Bạn nên đặt giá trị là false vì nên để việc thêm fragment vào containner cho FragmentManager đảm nhiệm
     //Mỗi Activity sẽ có một FragmentManager
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_rage_comic_details, container, false)
+//        return inflater?.inflate(R.layout.fragment_rage_comic_details, container, false)
+
+        //reference đến FragmentRageComicDetailsBinding trong fragment view
+        val fragmentRageComicDetailsBinding =
+            FragmentRageComicDetailsBinding.inflate(inflater!!, container, false)
+
+        //bind view comic với dữ liệu Comic được truyền qua
+        val comic = arguments?.getSerializable(COMIC) as Comic
+        fragmentRageComicDetailsBinding.comic = comic
+        comic.text = String.format(getString(R.string.description_format), comic.description, comic.url)
+
+        return fragmentRageComicDetailsBinding.root
     }
 }

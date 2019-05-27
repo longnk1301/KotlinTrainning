@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Galacticon</string>
+
+    <string name="api_key">jlU0jw1lyepCsHmhPJ3UZ3IGbCbmKI3dB3QSWV1x</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="change_layout_manager">Change Layout</string>
+</resources>
